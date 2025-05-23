@@ -36,17 +36,13 @@ jobs:
         run: |
           python manage.py migrate --noinput
           python manage.py test
-
       - name: Deploy to Heroku
         if: github.event_name == 'push'
-        uses: akhileshns/heroku-deploy@v4.4.8
+        uses: akhileshns/heroku-deploy@v3.12.12
         with:
           heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
           heroku_app_name: ${{ secrets.HEROKU_APP_NAME }}
           heroku_email:    ${{ secrets.HEROKU_EMAIL }}
-          strategy: api
-          check_status: true
-          usedocker: false
 
       - name: Show deployment URL
         if: github.event_name == 'push'
